@@ -1,0 +1,6 @@
+.border.border-slate-200.rounded.px-4.py-2 class=(classes)
+  - if title || icon
+    .flex.justify-between.items-center.mb-2
+      h3.font-medium.text-slate-600 = title
+      i.fa-light.text-slate-500.ml-2 class=("fa-#{icon}")
+  = content
