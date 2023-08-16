@@ -1,0 +1,11 @@
+.flow-root
+  .overflow-x-auto
+    .inline-block.min-w-full.py-2.align-middle
+      table.min-w-full.divide-y.divide-gray-300
+        thead
+          tr
+            - headers.each do |header|
+              = header
+        tbody.divide-y.divide-gray-200
+          - rows.each do |row|
+            = row

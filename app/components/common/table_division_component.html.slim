@@ -1,0 +1,6 @@
+td.whitespace-nowrap.px-3.py-4.text-sm.text-gray-500 class=(optional_classes) id=(id)
+  - if link?
+    = link_to link_path, class: "block md:-mx-6 md:px-6 md:-my-4 md:py-4" do
+      = content
+  - else
+    = content
