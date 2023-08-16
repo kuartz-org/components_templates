@@ -1,0 +1,7 @@
+= render Common::CardComponent.new(classes: level_background) do
+  .flex
+    .flex-shrink-0
+      i class=(level_icon)
+    .ml-3
+      .font-semibold.text-slate-900 = title
+      .text-slate-600 = content
