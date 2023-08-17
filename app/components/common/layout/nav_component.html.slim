@@ -2,5 +2,4 @@
   .container.mx-auto
     nav.flex.space-x-6 class="-mb-px"
       - links.each do |link|
-        = link_to link[:label], link[:path],
-          class: "whitespace-nowrap border-b-2 py-2 px-1 font-medium text-sm #{active_link_classes(link)}"
+        = link

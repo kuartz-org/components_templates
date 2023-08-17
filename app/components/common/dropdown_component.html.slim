@@ -1,0 +1,16 @@
+.relative.inline-block.text-left data-controller="dropdown"
+  div
+    button[
+      type="button"
+      aria-expanded="true"
+      aria-haspopup="true"
+      data-action="dropdown#toggle"]
+      = content
+  .hidden.absolute.right-0.z-10.mt-2.w-56.origin-top-right.divide-y.divide-slate-200.rounded-md.bg-white.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none[
+    role="menu"
+    aria-orientation="vertical"
+    aria-labelledby="menu-button"
+    tabindex="-1"
+    data-dropdown-target="menu"]
+    - action_groups.each do |action_group|
+      = action_group
