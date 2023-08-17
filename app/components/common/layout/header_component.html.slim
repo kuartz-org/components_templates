@@ -3,7 +3,11 @@ header.bg-slate-100.w-full.py-2.border-b.border-slate-200
     .flex.justify-between.items-center
       .flex.items-center
         = link_to root_path do
-          = brand
+          = link_to root_path do
+            - if image
+              = image_tag image, title: brand, alt: brand, class: "h-10 -my-2"
+            - else
+              = brand
       .flex.items-center
         = render Common::DropdownComponent.new do |dropdown|
           i.fa-solid.fa-user
