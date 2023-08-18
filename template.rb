@@ -3,3 +3,4 @@ def source_paths
 end
 
 directory "app", force: true
+directory "test", force: true

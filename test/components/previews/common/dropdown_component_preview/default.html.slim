@@ -1,0 +1,11 @@
+.flex.justify-end
+    = render Common::DropdownComponent.new do |dropdown|
+      i.fa-solid.fa-user
+      - dropdown.with_list do |list|
+        - list.with_item_link(name: "Profil", href: profile_path)
+        - list.with_item_link(name: "Paramètres", href: "#Settings")
+
+      - dropdown.with_list do |list|
+        - list.with_item_button(name: "Se déconnecter",
+                                action_path: "destroy_user_session_path",
+                                method: :delete)
