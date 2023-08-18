@@ -11,8 +11,11 @@ header.bg-slate-100.w-full.py-2.border-b.border-slate-200
       .flex.items-center
         = render Common::DropdownComponent.new do |dropdown|
           i.fa-solid.fa-user
-          - dropdown.with_action_group do |action_group|
-            - action_group.with_action(name: "Profil", href: profile_path)
-            - action_group.with_action(name: "Paramètres", href: "#Settings")
-          - dropdown.with_action_group do |action_group|
-            - action_group.with_action(name: "Se déconnecter", href: "#Sign out")
+          - dropdown.with_list do |list|
+            - list.with_item_link(name: "Profil", href: profile_path)
+            - list.with_item_link(name: "Paramètres", href: "#Settings")
+
+          - dropdown.with_list do |list|
+            - list.with_item_button(name: "Se déconnecter",
+                                    action_path: destroy_user_session_path,
+                                    method: :delete)

@@ -12,6 +12,16 @@
 module Common
   class TableComponent < ViewComponent::Base
     renders_many :headers, TableHeaderComponent
-    renders_many :rows, TableRowComponent
+    renders_many :rows, "TableRowComponent"
+
+    class TableRowComponent < ViewComponent::Base
+      renders_many :cells, TableDivisionComponent
+
+      slim_template <<~SLIM
+        tr
+          - cells.each do |cell|
+            = cell
+      SLIM
+    end
   end
 end
