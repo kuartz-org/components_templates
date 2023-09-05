@@ -1,0 +1,25 @@
+---
+title: Overview
+label: Overview
+---
+
+The design system is a collection of reusable components.
+
+## Update
+In order to update the design system, you need to clone the design system repository.
+
+```bash
+git clone git@github.com:kuartz-org/components_templates.git
+```
+
+Then you can run the following command to update the design system from your application directory.
+
+```bash
+cd ../components_templates
+git pull origin master
+cd ../your_app
+rails app:template LOCATION=../components_templates/template.rb
+```
+
+! Make sure you have committed all your changes before running the command since
+it will override the viewComponents directory.

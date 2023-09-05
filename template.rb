@@ -2,5 +2,5 @@ def source_paths
   [__dir__]
 end
 
-directory "app", force: true
-directory "test", force: true
+directory "app/components/common", force: true
+directory "test/components/previews/common", force: true
