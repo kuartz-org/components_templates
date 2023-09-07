@@ -7,7 +7,8 @@ module Common
     class ListComponent < ViewComponent::Base
       renders_many :items, types: {
         link: "LinkComponent",
-        button: "ButtonComponent"
+        button: "ButtonComponent",
+        text: "TextComponent"
       }
 
       slim_template <<~SLIM
@@ -58,6 +59,13 @@ module Common
 
           { method: method }
         end
+      end
+
+      class TextComponent < ViewComponent::Base
+        slim_template <<~SLIM
+          .w-full.text-left.text-slate-900.px-4.py-2.text-sm.font-medium
+            = content
+        SLIM
       end
     end
   end
