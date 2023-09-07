@@ -1,0 +1,90 @@
+import { Controller } from "@hotwired/stimulus"
+import {
+  Chart,
+  Colors,
+  BarController,
+  BarElement,
+  LineController,
+  LineElement,
+  PointElement,
+  LinearScale,
+  TimeScale,
+  Tooltip
+} from "chart.js"
+import "chartjs-adapter-date-fns"
+import { fr } from 'date-fns/locale'
+
+// Connects to data-controller="chart"
+export default class extends Controller {
+  static targets = ["canvas"]
+  static values = {
+    payload: Object
+  }
+
+  initialize() {
+    Chart.register(
+      Colors,
+      BarController,
+      BarElement,
+      LineController,
+      LineElement,
+      PointElement,
+      LinearScale,
+      TimeScale,
+      Tooltip
+    )
+  }
+
+  connect() {
+    const payload = this.payloadValue
+
+    if (payload.options.scales.x.type === "time") {
+      this._setupTimeI18n(payload)
+    }
+
+    this._loadUnits(payload)
+
+    new Chart(this.canvasTarget, payload)
+  }
+
+  // `fr` is an object from date-fns so we can't get it from the payload
+  // x axis scale should be named `x`
+  _setupTimeI18n(payload) {
+    const scaleXAdapterOptions = {
+      adapters: {
+        date: {
+          locale: fr
+        }
+      }
+    }
+    payload.options.scales.x = Object.assign(payload.options.scales.x, scaleXAdapterOptions)
+  }
+
+  // Units can only be set with callbacks so we can't get them from the payload
+  // First scale will be ignored as considered as the x axis.
+  _loadUnits(payload) {
+    Object.keys(payload.options.scales).slice(1).forEach((scaleKey, index) => {
+      const scale = payload.options.scales[scaleKey]
+      const scaleTicksOptions = {
+          ticks: {
+            callback: function (value, _index, _ticks) {
+              return `${value} ${scale.unit}`;
+          }
+        }
+      }
+      payload.options.scales[scaleKey] = Object.assign(scale, scaleTicksOptions)
+
+      const scaleTooltipOptions = {
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              return `${context.dataset.label}: ${context.parsed.y} ${scale.unit}`;
+            }
+          }
+        }
+      }
+
+      payload.data.datasets[index] = Object.assign(payload.data.datasets[index], scaleTooltipOptions)
+    })
+  }
+}
