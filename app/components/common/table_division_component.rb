@@ -17,7 +17,7 @@ module Common
     OPTIONS = {
       text_center: "text-center",
       text_right: "text-right",
-      first_col: "py-4 pl-4 pr-3 font-medium text-gray-900 sm:pl-0"
+      first_col: "pl-4 pr-3 font-medium text-gray-900 sm:pl-0"
     }.freeze
     def optional_classes
       OPTIONS.fetch_values(*selected_options).join(" ").tap do |classes|
