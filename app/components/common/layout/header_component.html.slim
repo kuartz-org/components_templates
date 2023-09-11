@@ -13,12 +13,17 @@ header.bg-slate-100.w-full.py-2.border-b.border-slate-200
           i.fa-solid.fa-user
           - dropdown.with_list do |list|
             - list.with_item_text do
-              = controller.current_user.full_name
+              .flex.items-end.justify-between
+                span = controller.current_user.full_name
+                - if controller.current_user.admin?
+                  = render Common::BadgeComponent.new(level: :warning).with_content("Admin")
               .text-xs.text-gray-500 = controller.current_user.email
+
 
           - dropdown.with_list do |list|
             - list.with_item_link(name: "Profil", href: profile_path)
-            - list.with_item_link(name: "Utilisateurs", href: admin_users_path)
+            - if controller.allowed_to?(:index?, User, with: Admin::UserPolicy)
+              - list.with_item_link(name: "Utilisateurs", href: admin_users_path)
 
           - dropdown.with_list do |list|
             - list.with_item_button(name: "Se déconnecter",
