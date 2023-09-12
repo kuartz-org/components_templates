@@ -2,14 +2,18 @@
 
 module Common
   class CardComponent < ViewComponent::Base
-    def initialize(title: nil, icon: nil, classes: nil)
+    def initialize(title: nil, icon: nil, **options)
       @title = title
       @icon = icon
-      @classes = classes
+      @options = options
     end
 
     private
 
-    attr_reader :title, :icon, :classes
+    attr_reader :title, :icon, :options
+
+    def classes
+      options[:class]
+    end
   end
 end

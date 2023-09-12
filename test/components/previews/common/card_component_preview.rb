@@ -13,5 +13,8 @@ module Common
 
     def with_title_and_icon
     end
+
+    def with_custom_css_classes
+    end
   end
 end
