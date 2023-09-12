@@ -1,0 +1,22 @@
+# frozen_string_literal: true
+
+module Common
+  class TitleComponent < ViewComponent::Base
+    def initialize(level: 1)
+      @level = level
+    end
+
+    LEVEL_CLASSES = {
+      1 => "mt-10 mb-4 text-3xl font-bold tracking-tight text-slate-900",
+      2 => "mt-8 mb-2 text-2xl font-bold tracking-tight text-slate-900",
+      3 => "mt-4 mb-1 text-lg font-semibold tracking-tight text-slate-800"
+    }.freeze
+    def call
+      content_tag("h#{level}", content, class: LEVEL_CLASSES[level])
+    end
+
+    private
+
+    attr_reader :level
+  end
+end
