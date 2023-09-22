@@ -1,0 +1,12 @@
+.bg-white.py-6.rounded
+  .border-b.border-gray-900/10
+    .border-b.border-gray-200
+      .ml-4.mb-4
+        h3.text-base.font-semibold.leading-6.text-gray-900 = title
+
+    .mt-6.px-4
+      = content
+
+  .mt-6.flex.flex-row-reverse.items-center.justify-start.gap-x-6.px-4
+    = render Common::Form::ButtonComponent.new(level: :primary).with_content(action_text)
+    = render Common::ButtonTagComponent.new(data: { modal: "close" }).with_content(t("cancel"))

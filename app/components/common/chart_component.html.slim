@@ -1,0 +1,11 @@
+section data-controller="chart" data-chart-payload-value=(payload) data-chart-title-value=(title)
+  .flex.justify-end
+    = render Common::DropdownComponent.new do |dropdown|
+      .px-1.active:shadow-inner.shadow-sm.rounded-md.text-gray-900.bg-white.hover:bg-gray-50.ring-1.ring-inset.ring-gray-300
+        i.fa-light.fa-bars.fa-fw.fa-xs
+      - dropdown.with_list do |list|
+        - list.with_item_button(name: t(".download_image"),
+                                data: { action: "chart#downloadImage" })
+        - list.with_item_button(name: t(".download_csv"),
+                                data: { action: "chart#downloadCSV" })
+  canvas.mt-2 data-chart-target="canvas"

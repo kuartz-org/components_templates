@@ -2,7 +2,7 @@
     = render Common::DropdownComponent.new do |dropdown|
       i.fa-solid.fa-user
       - dropdown.with_list do |list|
-        - list.with_item_link(name: "Profil", href: profile_path)
+        - list.with_item_link(name: "Profil", href: "#Profile")
         - list.with_item_link(name: "Paramètres", href: "#Settings")
 
       - dropdown.with_list do |list|

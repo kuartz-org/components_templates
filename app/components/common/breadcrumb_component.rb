@@ -9,7 +9,7 @@ module Common
         li.group
           .flex.items-center.text-sm.font-medium.text-gray-500.space-x-4.group-first:-ml-4
             i.fa-solid.fa-chevron-right.fa-xs.group-first:hidden
-            = content
+            div = content
       SLIM
     end
   end

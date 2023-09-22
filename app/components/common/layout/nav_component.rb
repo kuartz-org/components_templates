@@ -21,7 +21,7 @@ module Common
         attr_reader :name, :href, :active
 
         def active_link_classes
-          return "border-green-500 text-green-600" if active
+          return "border-emerald-500 text-emerald-600" if active
 
           "border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700"
         end

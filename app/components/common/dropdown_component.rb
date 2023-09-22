@@ -38,27 +38,21 @@ module Common
       class ButtonComponent < ViewComponent::Base
         slim_template <<~SLIM
           = button_to name, action_path,
-            **method_attribute,
+            **options,
             class: "w-full text-left text-slate-700 px-4 py-2 text-sm hover:bg-slate-100",
             role: "menuitem",
             tabindex: "-1"
         SLIM
 
-        def initialize(name:, action_path:, method: nil)
+        def initialize(name:, action_path: "", **options)
           @name = name
           @action_path = action_path
-          @method = method
+          @options = options
         end
 
         private
 
-        attr_reader :name, :action_path, :method
-
-        def method_attribute
-          return {} if method.blank?
-
-          { method: method }
-        end
+        attr_reader :name, :action_path, :options
       end
 
       class TextComponent < ViewComponent::Base

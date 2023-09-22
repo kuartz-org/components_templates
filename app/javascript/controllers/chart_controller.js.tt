@@ -1,0 +1,132 @@
+import { Controller } from "@hotwired/stimulus"
+import {
+  Chart,
+  Colors,
+  BarController,
+  BarElement,
+  LineController,
+  LineElement,
+  PointElement,
+  PolarAreaController,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+  TimeScale,
+  RadialLinearScale,
+  Tooltip
+} from "chart.js"
+import "chartjs-adapter-date-fns"
+import { fr } from 'date-fns/locale'
+
+// Connects to data-controller="chart"
+export default class extends Controller {
+  static targets = ["canvas"]
+  static values = {
+    payload: Object,
+    title: String
+  }
+
+  initialize() {
+    Chart.register(
+      Colors,
+      BarController,
+      BarElement,
+      LineController,
+      LineElement,
+      PolarAreaController,
+      ArcElement,
+      PointElement,
+      CategoryScale,
+      LinearScale,
+      TimeScale,
+      RadialLinearScale,
+      Tooltip
+    )
+  }
+
+  connect() {
+    const payload = this.payloadValue
+
+    if (payload.options.scales && payload.options.scales.x) {
+      if (payload.options.scales.x.type === "time") {
+        this._setupTimeI18n(payload)
+      }
+
+      this._loadUnits(payload)
+    }
+
+    const chart = new Chart(this.canvasTarget, payload)
+    this.chart = chart
+  }
+
+  downloadImage() {
+    const url = this.chart.toBase64Image()
+
+    window.open(url)
+  }
+
+  downloadCSV() {
+    const labels = this.chart.data.labels
+    labels.unshift("")
+
+    const datasets = this.chart.data.datasets.map((dataset) => {
+      const datasetUnit = dataset.unit ? `(${dataset.unit})` : ""
+      const datasetLabel = [dataset.label, datasetUnit].join(" ")
+      return [datasetLabel, ...dataset.data].join(",")
+    })
+
+    const csv = [labels.join(","), ...datasets].join("\n")
+
+    const blob = new Blob([csv], { type: "text/csv" })
+    const title = this.titleValue || new Date().toISOString().slice(0, 10)
+    const filename = `${title}.csv`
+
+    const url = window.URL.createObjectURL(blob)
+    const a = document.createElement("a")
+
+    a.href = url
+    a.download = filename
+    a.click()
+  }
+
+  // `fr` is an object from date-fns so we can't get it from the payload
+  // x axis scale should be named `x`
+  _setupTimeI18n(payload) {
+    const scaleXAdapterOptions = {
+      adapters: {
+        date: {
+          locale: fr
+        }
+      }
+    }
+    payload.options.scales.x = Object.assign(payload.options.scales.x, scaleXAdapterOptions)
+  }
+
+  // Units can only be set with callbacks so we can't get them from the payload
+  // First scale will be ignored as considered as the x axis.
+  _loadUnits(payload) {
+    Object.keys(payload.options.scales).slice(1).forEach((scaleKey, index) => {
+      const scale = payload.options.scales[scaleKey]
+      const scaleTicksOptions = {
+          ticks: {
+            callback: function (value, _index, _ticks) {
+              return `${value} ${scale.unit}`;
+          }
+        }
+      }
+      payload.options.scales[scaleKey] = Object.assign(scale, scaleTicksOptions)
+
+      const scaleTooltipOptions = {
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              return `${context.dataset.label}: ${context.parsed.y} ${scale.unit}`;
+            }
+          }
+        }
+      }
+
+      payload.data.datasets[index] = Object.assign(payload.data.datasets[index], scaleTooltipOptions)
+    })
+  }
+}

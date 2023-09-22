@@ -2,17 +2,13 @@
 
 module Common
   class ChartComponent < ViewComponent::Base
-    slim_template <<~SLIM
-      section data-controller="chart" data-chart-payload-value=(payload)
-        canvas data-chart-target="canvas"
-    SLIM
-
-    def initialize(payload)
+    def initialize(payload:, title: "")
       @payload = payload
+      @title = title
     end
 
     private
 
-    attr_reader :payload
+    attr_reader :payload, :title
   end
 end
