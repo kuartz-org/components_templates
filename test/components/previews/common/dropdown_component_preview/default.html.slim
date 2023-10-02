@@ -3,9 +3,9 @@
       i.fa-solid.fa-user
       - dropdown.with_list do |list|
         - list.with_item_link(name: "Profil", href: "#Profile")
-        - list.with_item_link(name: "Paramètres", href: "#Settings")
+        - list.with_item_link(name: "Settings", href: "#Settings")
 
       - dropdown.with_list do |list|
-        - list.with_item_button(name: "Se déconnecter",
-                                action_path: "destroy_user_session_path",
+        - list.with_item_button(name: "Log out",
+                                action_path: "#some_path",
                                 method: :delete)

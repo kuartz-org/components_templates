@@ -62,5 +62,21 @@ module Common
         SLIM
       end
     end
+
+    def initialize(pop_direction: :right)
+      @pop_direction = pop_direction
+    end
+
+    private
+
+    attr_reader :pop_direction
+
+    POP_DIRECTIONS = {
+      right: "origin-top-right right-0",
+      left: "origin-top-left left-0"
+    }.freeze
+    def pop_direction_class
+      POP_DIRECTIONS[pop_direction.to_sym]
+    end
   end
 end

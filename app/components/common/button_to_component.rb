@@ -3,8 +3,14 @@
 module Common
   class ButtonToComponent < LinkComponent
     slim_template <<~SLIM
-      = button_to nil, **options do
+      = button_to path, **options do
         = content
     SLIM
+
+    def initialize(path, level: :secondary, **options)
+      @level = level
+      @path = path
+      @options = options
+    end
   end
 end

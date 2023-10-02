@@ -1,0 +1,5 @@
+.flex.space-x-4
+  = render Common::LinkComponent.new(path: "#some_path").with_content("default")
+  = render Common::LinkComponent.new(level: :primary,path: "#some_path").with_content("primary")
+  = render Common::LinkComponent.new(level: :secondary,path: "#some_path").with_content("secondary")
+  = render Common::LinkComponent.new(level: :danger,path: "#some_path").with_content("danger")

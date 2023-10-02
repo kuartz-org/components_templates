@@ -1,0 +1,8 @@
+= render Common::BreadcrumbComponent.new do |breadcrumb|
+    - breadcrumb.with_item do
+      = link_to "Home", "#some_path"
+
+    - breadcrumb.with_item do
+      = link_to "Category", "#some_other_path"
+
+    - breadcrumb.with_item.with_content("Title")

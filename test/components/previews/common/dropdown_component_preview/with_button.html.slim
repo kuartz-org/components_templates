@@ -1,0 +1,6 @@
+= render Common::DropdownComponent.new(pop_direction: :left) do |dropdown|
+  div class=([Common::LinkComponent::GLOBAL_CLASSES, Common::LinkComponent::LEVEL_CLASSES[:secondary]].join(" "))
+    i.fa-solid.fa-bars
+  - dropdown.with_list do |list|
+    - list.with_item_link(name: "some link", href: "#some_path")
+    - list.with_item_text.with_content("some text")

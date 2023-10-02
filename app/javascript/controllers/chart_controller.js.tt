@@ -16,7 +16,7 @@ import {
   Tooltip
 } from "chart.js"
 import "chartjs-adapter-date-fns"
-import { fr } from 'date-fns/locale'
+import fr from "date-fns/locale/fr"
 
 // Connects to data-controller="chart"
 export default class extends Controller {

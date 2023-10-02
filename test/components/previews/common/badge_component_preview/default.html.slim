@@ -1,0 +1,7 @@
+.flex.space-x-4
+  = render Common::BadgeComponent.new.with_content("Default")
+  = render Common::BadgeComponent.new(level: :info).with_content("Info")
+  = render Common::BadgeComponent.new(level: :positive).with_content("Positive")
+  = render Common::BadgeComponent.new(level: :negative).with_content("Negative")
+  = render Common::BadgeComponent.new(level: :warning).with_content("Warning")
+  = render Common::BadgeComponent.new(level: :urgent).with_content("Urgent")

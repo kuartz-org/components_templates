@@ -1,0 +1,42 @@
+---
+title: Links and buttons
+label: 2. Links and buttons
+---
+
+We have set up view_components to cover the needs of the following helpers:
+
+```ruby
+link_to
+button_to
+button_tag
+```
+
+The associated view_components will setup default classes for different levels.
+
+## Levels
+
+<lookbook-embed
+  preview="Common::LinkComponentPreview"
+  scenario="default"
+  panels="source">
+</lookbook-embed>
+
+## Examples
+
+`link_to`
+
+```ruby
+= render Common::::LinkComponent.new(href: "some_path").with_content("Some text")
+```
+
+`button_to`
+
+```ruby
+= render Common::ButtonToComponent.new("some_path", params: { some_attribute: "value" } ).with_content("Some text")
+```
+
+`button_tag`
+
+```ruby
+render Common::ButtonTagComponent.new(data: { action: "someController#someAction" }).with_content("Some text")
+```

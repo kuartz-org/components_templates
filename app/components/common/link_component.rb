@@ -36,7 +36,7 @@ module Common
       TXT
     }.freeze
     def level_classes
-      LEVEL_CLASSES[level]
+      LEVEL_CLASSES[level.to_sym]
     end
 
     def options
