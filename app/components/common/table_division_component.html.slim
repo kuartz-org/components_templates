@@ -1,4 +1,4 @@
-td.whitespace-nowrap.px-3.py-4.text-sm.text-gray-500 class=("group-hover:bg-gray-100" if link?) class=(optional_classes) id=(id)
+td *html_attributes class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" class=(optional_classes)
   - if link?
     = link_to link_path, class: "block -mx-3 px-3 -my-4 py-4" do
       / &nbsp; allow empty content to get same height as other cells

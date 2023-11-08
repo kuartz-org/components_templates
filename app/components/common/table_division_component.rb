@@ -6,13 +6,14 @@ module Common
       super
       @selected_options = selected_options
 
-      options.assert_valid_keys(:class, :link_to, :id)
+      options.assert_valid_keys(:class, :link_to, :id, :title)
+      @link_path = options.delete(:link_to)
       @options = options
     end
 
     private
 
-    attr_reader :selected_options, :options
+    attr_reader :selected_options, :link_path, :options
 
     OPTIONS = {
       text_center: "text-center",
@@ -25,16 +26,12 @@ module Common
       end
     end
 
-    def link_path
-      options[:link_to]
-    end
+    def link? = link_path.present?
 
-    def link?
-      link_path.present?
-    end
+    def html_attributes
+      return options.deep_merge(class: "group-hover:bg-gray-100") if link?
 
-    def id
-      options[:id]
+      options.presence || { class: "_" } # options is empty hash, *html_attributes (in template) raise an error
     end
   end
 end

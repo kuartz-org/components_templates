@@ -1,8 +1,8 @@
 .flow-root
-  .overflow-x-auto
+  div*options class="overflow-x-auto"
     .inline-block.min-w-full.align-middle
-      table.min-w-full.divide-y.divide-gray-300
-        thead
+      table.table-auto.min-w-full.divide-y.divide-gray-300
+        thead.sticky.top-0.bg-white
           tr
             - headers.each do |header|
               = header
